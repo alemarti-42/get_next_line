@@ -6,7 +6,7 @@
 /*   By: alemarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 17:52:22 by alemarti          #+#    #+#             */
-/*   Updated: 2021/06/23 19:44:38 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/06/23 22:02:53 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int	ft_strlen(const char *s)
 	int	i;
 
 	i = 0;
-	while (s[i++])
-		;
+	while (s[i])
+		i++;
 	return (i);
 }
 
@@ -28,6 +28,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	int		i;
 	int		j;
 
+	printf("\n\tINICIO JOIN\n");
 	if (!s1 || !s2)
 		return (0);
 	size = ft_strlen(s1) + ft_strlen(s2) + 1;
@@ -36,14 +37,16 @@ char	*ft_strjoin(char *s1, char *s2)
 		return (0);
 	i = -1;
 	j = 0;
+	printf("\nBUG\n");
 	while (s1[++i])
 		res[i] = s1[i];
+	printf("\nBUG\n");
 	free(s1);
+	printf("\nBUG\n");
 	j = i ;
 	i = -1;
 	while (s2[++i])
 		res[j + i] = s2[i];
-	free(s2);
 	res[j + i] = 0;
 	return (res);
 }
