@@ -6,7 +6,7 @@
 /*   By: alemarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 14:44:06 by alemarti          #+#    #+#             */
-/*   Updated: 2021/06/23 21:57:24 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/06/24 17:52:48 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 # include<stdio.h>
 
 int		get_next_line(int fd, char **line);
-char	*head(char *buf);
+char	*head(char **buf);
 int		builder(int fd, char **line, char **buf);
-int		init_memory(char **buf, char **line);
+int		init_memory(int fd, char **buf, char **line);
 int		fill_buffer(int fd, char *buf);
 int		ft_strlen(const char *s);
 char	*ft_strjoin(char *s1, char *s2);
