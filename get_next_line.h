@@ -6,7 +6,7 @@
 /*   By: alemarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 14:44:06 by alemarti          #+#    #+#             */
-/*   Updated: 2021/06/24 17:52:48 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/06/28 15:36:03 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ int		builder(int fd, char **line, char **buf);
 int		init_memory(int fd, char **buf, char **line);
 int		fill_buffer(int fd, char *buf);
 int		ft_strlen(const char *s);
-char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strjoin_gnl(char *s1, char *s2);
 int		nl_position(char *str);
 #endif
