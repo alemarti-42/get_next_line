@@ -6,11 +6,12 @@
 /*   By: alemarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 17:52:22 by alemarti          #+#    #+#             */
-/*   Updated: 2021/06/28 15:56:43 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/06/29 18:51:01 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
 int	ft_strlen(const char *s)
 {
 	int	i;
@@ -22,7 +23,7 @@ int	ft_strlen(const char *s)
 }
 
 /*
- * this strjoiin frees both string before returning. 
+ * this strjoin frees both string before returning.
  */
 char	*ft_strjoin_gnl(char *s1, char *s2)
 {
@@ -41,22 +42,24 @@ char	*ft_strjoin_gnl(char *s1, char *s2)
 	j = 0;
 	while (s1[++i])
 		res[i] = s1[i];
-	free(s1);
-	*s1 = 0;
+	if (s1)
+		free(s1);
+	s1 = 0;
 	j = i ;
 	i = -1;
 	while (s2[++i])
 		res[j + i] = s2[i];
-	free(s2);
-	*s2 = 0;
+	if (s2)
+		free(s2);
+	s2 = 0;
 	res[j + i] = 0;
 	return (res);
 }
 
 /*
- * nl_position return the position of the first newline if any, -1 otherwise
+ * ft_nl_position return the position of the first newline if any, -1 otherwise
  */
-int	nl_position(char *str)
+int	ft_nl_position(char *str)
 {
 	int	i;
 
