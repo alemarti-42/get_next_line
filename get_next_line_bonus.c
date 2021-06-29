@@ -6,11 +6,16 @@
 /*   By: alemarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 17:53:15 by alemarti          #+#    #+#             */
-/*   Updated: 2021/06/28 17:04:16 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/06/29 20:18:51 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
+
+static char	*ft_head(char **buf);
+static int	ft_builder(int fd, char **line, char **buf);
+static int	ft_init_memory(int fd, char **buf, char **line);
+static int	ft_fill_buffer(int fd, char *buf);
 
 int	get_next_line(int fd, char **line)
 {
@@ -19,9 +24,9 @@ int	get_next_line(int fd, char **line)
 
 	if (BUFFER_SIZE < 1 || fd < 0 || fd > 256 || !line)
 		return (-1);
-	if (!init_memory(fd, buffer, line))
+	if (!ft_init_memory(fd, buffer, line))
 		return (-1);
-	buf_len = fill_buffer(fd, buffer[fd]);
+	buf_len = ft_fill_buffer(fd, buffer[fd]);
 	if (buf_len == -1)
 	{
 		free(buffer[fd]);
@@ -33,15 +38,15 @@ int	get_next_line(int fd, char **line)
 		buffer[fd] = 0;
 		return (0);
 	}
-	return (builder(fd, line, buffer));
+	return (ft_builder(fd, line, buffer));
 }
 
 /*
- * head function returns an allocated substring containing the characters
+ * ft_head function returns an allocated substring containing the characters
  * before the first newline if there is any, or the whole string otherwise.
  * Additionally, places the leftovers at the beginning of the string.
  */
-char	*head(char **buf)
+static char	*ft_head(char **buf)
 {
 	int		i;
 	int		count;
@@ -50,7 +55,7 @@ char	*head(char **buf)
 
 	i = -1;
 	count = 0;
-	nl_pos = nl_position(*buf);
+	nl_pos = ft_nl_position(*buf);
 	if (nl_pos < 0)
 		nl_pos = ft_strlen(*buf);
 	res = (char *)malloc(sizeof(char) * (nl_pos + 1));
@@ -69,10 +74,10 @@ char	*head(char **buf)
 }
 
 /*
- * builder function builds the resulting line concatenating the buffer
+ * ft_builder function builds the resulting line concatenating the buffer
  * iteratively.
  */
-int	builder(int fd, char **line, char **buf)
+static int	ft_builder(int fd, char **line, char **buf)
 {
 	int	buf_len;
 	int	flag_nl;
@@ -81,9 +86,9 @@ int	builder(int fd, char **line, char **buf)
 	buf_len = ft_strlen(buf[fd]);
 	while (buf_len > 0 )
 	{
-		if (nl_position(buf[fd]) >= 0)
+		if (ft_nl_position(buf[fd]) >= 0)
 			flag_nl = 1;
-		*line = ft_strjoin_gnl(*line, head(&buf[fd]));
+		*line = ft_strjoin_gnl(*line, ft_head(&buf[fd]));
 		buf_len = ft_strlen(buf[fd]);
 		if (flag_nl == 1)
 			return (1);
@@ -104,7 +109,7 @@ int	builder(int fd, char **line, char **buf)
 /*
  * Initializes the line every new iteration and the buffer if it does not exist
  */
-int	init_memory(int fd, char **buf, char **line)
+static int	ft_init_memory(int fd, char **buf, char **line)
 {
 	int	i;
 
@@ -135,7 +140,7 @@ int	init_memory(int fd, char **buf, char **line)
 /*
  * checks if the buffer is empty and if so, fills it from the file.
  */
-int	fill_buffer(int fd, char *buf)
+static int	ft_fill_buffer(int fd, char *buf)
 {
 	int	buf_len;
 
