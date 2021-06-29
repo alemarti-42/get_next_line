@@ -6,7 +6,7 @@
 /*   By: alemarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 17:52:22 by alemarti          #+#    #+#             */
-/*   Updated: 2021/06/29 20:28:02 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/06/29 21:32:49 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,6 @@ int	ft_strlen(const char *s)
 	return (i);
 }
 
-/*
- * this strjoin frees both string before returning.
- */
 char	*ft_strjoin_gnl(char *s1, char *s2)
 {
 	int		size;
@@ -54,9 +51,6 @@ char	*ft_strjoin_gnl(char *s1, char *s2)
 	return (res);
 }
 
-/*
- * ft_nl_position return the position of the first newline if any, -1 otherwise
- */
 int	ft_nl_position(char *str)
 {
 	int	i;

@@ -6,7 +6,7 @@
 /*   By: alemarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 17:53:15 by alemarti          #+#    #+#             */
-/*   Updated: 2021/06/29 20:47:59 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/06/29 21:33:20 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,6 @@ int	get_next_line(int fd, char **line)
 	return (ft_builder(fd, line, buffer));
 }
 
-/*
- * ft_head function returns an allocated substring containing the characters
- * before the first newline if there is any, or the whole string otherwise.
- * Additionally, places the leftovers at the beginning of the string.
- */
 char	*ft_head(char **buf)
 {
 	int		i;
@@ -68,10 +63,6 @@ char	*ft_head(char **buf)
 	return (res);
 }
 
-/*
- * ft_builder function builds the resulting line concatenating the buffer
- * iteratively.
- */
 int	ft_builder(int fd, char **line, char **buf)
 {
 	int	buf_len;
@@ -101,9 +92,6 @@ int	ft_builder(int fd, char **line, char **buf)
 	return (-1);
 }
 
-/*
- * Initializes the line every new iteration and the buffer if it does not exist
- */
 int	ft_init_memory(int fd, char **buf, char **line)
 {
 	int	i;
@@ -132,9 +120,6 @@ int	ft_init_memory(int fd, char **buf, char **line)
 	return (1);
 }
 
-/*
- * checks if the buffer is empty and if so, fills it from the file.
- */
 int	ft_fill_buffer(int fd, char *buf)
 {
 	int	buf_len;
