@@ -6,16 +6,11 @@
 /*   By: alemarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 17:53:15 by alemarti          #+#    #+#             */
-/*   Updated: 2021/06/29 18:43:30 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/06/29 20:39:20 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-static char	*ft_head(char **buf);
-static int	ft_builder(int fd, char **line, char **buf);
-static int	ft_init_memory(int fd, char **buf, char **line);
-static int	ft_fill_buffer(int fd, char *buf);
 
 int	get_next_line(int fd, char **line)
 {
@@ -46,7 +41,7 @@ int	get_next_line(int fd, char **line)
  * before the first newline if there is any, or the whole string otherwise.
  * Additionally, places the leftovers at the beginning of the string.
  */
-static char	*ft_head(char **buf)
+char	*ft_head(char **buf)
 {
 	int		i;
 	int		count;
@@ -77,7 +72,7 @@ static char	*ft_head(char **buf)
  * ft_builder function builds the resulting line concatenating the buffer
  * iteratively.
  */
-static int	ft_builder(int fd, char **line, char **buf)
+int	ft_builder(int fd, char **line, char **buf)
 {
 	int	buf_len;
 	int	flag_nl;
@@ -109,7 +104,7 @@ static int	ft_builder(int fd, char **line, char **buf)
 /*
  * Initializes the line every new iteration and the buffer if it does not exist
  */
-static int	ft_init_memory(int fd, char **buf, char **line)
+int	ft_init_memory(int fd, char **buf, char **line)
 {
 	int	i;
 
@@ -140,7 +135,7 @@ static int	ft_init_memory(int fd, char **buf, char **line)
 /*
  * checks if the buffer is empty and if so, fills it from the file.
  */
-static int	ft_fill_buffer(int fd, char *buf)
+int	ft_fill_buffer(int fd, char *buf)
 {
 	int	buf_len;
 

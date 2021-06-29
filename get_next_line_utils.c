@@ -6,7 +6,7 @@
 /*   By: alemarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 17:52:22 by alemarti          #+#    #+#             */
-/*   Updated: 2021/06/29 18:51:01 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/06/29 20:28:02 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,12 @@ char	*ft_strjoin_gnl(char *s1, char *s2)
 		res[i] = s1[i];
 	if (s1)
 		free(s1);
-	s1 = 0;
 	j = i ;
 	i = -1;
 	while (s2[++i])
 		res[j + i] = s2[i];
 	if (s2)
 		free(s2);
-	s2 = 0;
 	res[j + i] = 0;
 	return (res);
 }
