@@ -6,7 +6,7 @@
 /*   By: alemarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 17:53:15 by alemarti          #+#    #+#             */
-/*   Updated: 2021/06/29 21:32:29 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/06/30 18:18:56 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	get_next_line(int fd, char **line)
 	static char	*buffer[256];
 	int			buf_len;
 
-	if (BUFFER_SIZE < 1 || fd < 0 || fd > 256 || !line)
+	if (BUFFER_SIZE < 1 || fd < 0 || fd > 255 || !line)
 		return (-1);
 	if (!ft_init_memory(fd, buffer, line))
 		return (-1);
@@ -36,6 +36,18 @@ int	get_next_line(int fd, char **line)
 	return (ft_builder(fd, line, buffer));
 }
 
+/*
+ * ft_head returns an allocated string containing the beggining of the buffer
+ *  until the first newline, or the while string if nt newline is found.
+ *  Additionally it 'rotates the buffer', this means, it places the tail of
+ *  the buffer at the beginning if something is left.
+ *
+ * 			buffer:		[ H | e | l | l | o | \n | W | o | r | l | d | \0]
+ *
+ * 				ft_head(buffer):	[ H | e | l | l | o | \0 ]
+ * 					\
+ * 					buffer:			[ W | o | r | l | d | \0 ]
+ */
 char	*ft_head(char **buf)
 {
 	int		i;
@@ -63,6 +75,11 @@ char	*ft_head(char **buf)
 	return (res);
 }
 
+/*
+ * ft_builder joins what is read bu the buffer to the line while there is no
+ * newline found. If the buffer empties and nothing can be read, builder
+ * returns 0, meaning the file has ended.
+ */
 int	ft_builder(int fd, char **line, char **buf)
 {
 	int	buf_len;
@@ -83,9 +100,9 @@ int	ft_builder(int fd, char **line, char **buf)
 		{
 			free(buf[fd]);
 			buf[fd] = 0;
-			if (buf_len < 0)
-				return (-1);
-			return (0);
+			if (buf_len == 0)
+				return (0);
+			return (-1);
 		}
 		buf[fd][buf_len] = 0;
 	}
@@ -99,13 +116,11 @@ int	ft_init_memory(int fd, char **buf, char **line)
 	i = 0;
 	*line = (char *)malloc(sizeof(char *));
 	if (!*line)
-	{
 		return (0);
-	}
 	**line = 0;
 	if (!buf[fd])
 	{
-		buf[fd] = (char *)malloc(sizeof(char *) * (BUFFER_SIZE + 1));
+		buf[fd] = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 		if (!buf[fd])
 		{
 			free (*line);
